@@ -8,9 +8,13 @@ struct Event
     Wire* wire;
     char state;
 };
-
 typedef struct EventLess {
-        //write the operator() required to make this a functor that compares Events by time
+        bool operator()(Event* m, Event* n){
+				if(m-> time < n-> time){
+					return true;
+					}
+					return false;
+				}
 } EventLess;
 	
 #endif

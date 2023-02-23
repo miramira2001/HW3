@@ -1,8 +1,6 @@
 #ifndef LLREC_H
 #define LLREC_H
-#ifndef NULL
-#define NULL 0
-#endif
+#include <cstdlib>
 
 /**
  * Node struct for both problems
@@ -83,7 +81,11 @@ Node* llfilter(Node* head, Comp pred)
     //*********************************************
     // Provide your implementation below
     //*********************************************
-
+    if(head == nullptr){
+        return nullptr;
+    }
+    return pred(head->val) ? llfilter(head->next, pred) : (head->next = llfilter(head->next, pred), head);
+    
 
 }
 

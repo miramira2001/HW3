@@ -17,12 +17,14 @@ int main(int argc, char* argv[])
     	  C.startUml(ss);
         C.run(ss);
         C.endUml(ss);
-        cout << ss.str() << endl;
     }
   }
   else
   {
-      cout << "Please provide a circuit file to simulate." << endl;
-      return 1;
+      C.test();
+      C.startUml(ss);
+      C.run(ss);
+      C.endUml(ss);
   }
+  cout << ss.str() << endl;
 }

@@ -3,6 +3,8 @@
 #include <functional>
 #include "llrec.h"
 using namespace std;
+#include "stack.h"
+
 
 /**
  * Reads integers (separated by whitespace) from a file
@@ -67,9 +69,11 @@ void dealloc(Node* head)
 //   function object struct declarations
 // -----------------------------------------------
 
-
-
-
+struct newFunc{
+    bool operator()(int l){
+        return !(l % 2);;
+    }
+};
 
 int main(int argc, char* argv[])
 {
@@ -86,10 +90,16 @@ int main(int argc, char* argv[])
     print(head);
 
     // Test out your linked list code
-
-
-
-    
+    newFunc l;
+ head = llfilter(head, l);
+    print(head);
+    int n = 2;
+    int m = 3;
+    Stack<int> htester;
+    htester.push(n);
+    htester.push(m);
+    cout << endl << htester.top() << endl;
     return 0;
 
 }
+
