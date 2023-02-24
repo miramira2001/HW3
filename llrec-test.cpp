@@ -99,6 +99,7 @@ int main(int argc, char* argv[])
     htester.push(n);
     htester.push(m);
     cout << endl << htester.top() << endl;
+    dealloc(head) ; 
     return 0;
 
 }
