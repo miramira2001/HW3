@@ -81,33 +81,41 @@ Heap<T,PComparator>::Heap(int l, PComparator c){
 }
 
 // vector cout 
-template <typename T, typename PComparator>
-void Heap<T,PComparator>::print() {
-    int step = 0;
-    int largestN = pow(v, step);
 
-    while (step < largestN) {
-        for (int i = 0; i < (int)size(); i++) {
-            std::cout << info[i] << " ";
-        }
-        std::cout << "Done \n";
-        step++;
-        largestN = pow(v, step);
-    }
+template <typename T, typename PComparator>
+void Heap<T,PComparator>::print(){
+  int step = 0;
+  int largestN = pow(v, step);
+  for(int i = 0; i < (int)size(); i++){
+
+    std::cout<< info[i] << " ";
+  }
+  std::cout << "End";
 }
+
+//push 
+
+template <typename T, typename PComparator>
+void Heap<T,PComparator>::sortDescending(int pos){
+	int kid = pos;
+	int adult = (kid-1)/v;
+	if(adult >= 0 && comp(info[kid], info[adult])){
+		std::swap(info[kid], info[adult]);
+		sortDescending(adult);
+	}
+}
+
 
 //pop 
 template <typename T, typename PComparator>
 void Heap<T,PComparator>::sortAscending(int yes) {
-    int num = yes;
-    int i = 1;
-    while (i <= v) {
-        int kid = yes*v + i;
-        if (kid < (int)size() && comp(info[kid], info[num])) {
-            num = kid;
-        }
-        i++;
+  int num = yes;
+  for(int i = 1; i <= v; i++){
+    int kid = yes*v + i;
+    if(kid < (int)size() && comp(info[kid], info[num])){
+      num = kid;
     }
+  }
   
   if(num != yes){
     std::swap(info[yes], info[num]);
@@ -116,17 +124,7 @@ void Heap<T,PComparator>::sortAscending(int yes) {
 
 }
 
-//push 
-template <typename T, typename PComparator>
-void Heap<T, PComparator>::sortDescending(int yes) {
-    int kid = yes;
-    int adult = (kid - 1) / v;
-    while (adult >= 0 && comp(info[kid], info[adult])) {
-        std::swap(info[kid], info[adult]);
-        kid = adult;
-        adult = (kid - 1) / v;
-    }
-}
+
 
 // We will start top() for you to handle the case of 
 // calling top on an empty heap
