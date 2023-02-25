@@ -30,38 +30,35 @@ void print(Node* head);
 void dealloc(Node* head);
 
 
-Node* readList(const char* filename)
-{
-    Node* h = NULL;
-    ifstream ifile(filename);
+Node* readListHelper(ifstream& ifile) {
     int v;
-    if( ! (ifile >> v) ) return h;
-    h = new Node(v, NULL);
-    Node *t = h;
-    while ( ifile >> v ) {
-        t->next = new Node(v, NULL);
-        t = t->next;
-    }
+    if( ! (ifile >> v) ) return NULL;
+    Node *h = new Node(v, NULL);
+    h->next = readListHelper(ifile);
     return h;
 }
 
-void print(Node* head)
-{
-    while(head) {
-        cout << head->val << " ";
-        head = head->next;
-    }
-    cout << endl;
+Node* readList(const char* filename) {
+    ifstream ifile(filename);
+    return readListHelper(ifile);
 }
 
-void dealloc(Node* head)
-{
-    Node* temp;
-    while(head) {
-        temp = head->next;
-        delete head;
-        head = temp;
+void print(Node* head) {
+    if(head == NULL) {
+        cout << endl;
+        return;
     }
+    cout << head->val << " ";
+    print(head->next);
+}
+
+void dealloc(Node* head) {
+    if(head == NULL) {
+        return;
+    }
+    Node* temp = head->next;
+    delete head;
+    dealloc(temp);
 }
 
 // -----------------------------------------------
