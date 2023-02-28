@@ -86,6 +86,8 @@ template <typename T, typename PComparator>
 void Heap<T,PComparator>::print(){
   int step = 0;
   int largestN = pow(v, step);
+
+  
   for(int i = 0; i < (int)size(); i++){
 
     std::cout<< info[i] << " ";
