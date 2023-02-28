@@ -1,6 +1,5 @@
 #ifndef LLREC_H
 #define LLREC_H
-#include <cstdlib>
 
 /**
  * Node struct for both problems
